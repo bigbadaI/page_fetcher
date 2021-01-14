@@ -1,5 +1,4 @@
 const request = require('request');
-const fsPromises = require('fs').promises;
 const fs = require('fs');
 
 const args = process.argv.slice(2);
@@ -9,15 +8,11 @@ console.log(url);
 // fs.openSync(url + '.txt', 'a')
 
 request(`${url}`, (error, response, body) => {
-  console.log('error:', error); // Print the error if one occurred
-  // console.log('statusCode:', response && response.statusCode); // Print the response status code if a response was received
+  console.log('error:', error); // Print the error if one occurs
   fs.appendFile(fileName, body, (err) => {
-    if (err) throw err;
-    console.log(`File made`);
+    if (err) throw err;// Print the error if one occurs
+    console.log(`File made`); //prints when file made succesfully
     let stats = fs.statSync(fileName);
-    console.log(`File size downloadeded was ${stats.size} and saved to ${fileName}`);
-    //creates filename/file and saves body information into new file
+    console.log(`File size downloadeded was ${stats.size} bytes and saved to ${fileName}`);// tells user how large the file was and where it was saved too
   });
-  
-  //  Print the HTML for the Google homepage.
 });
